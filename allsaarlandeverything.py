@@ -1,6 +1,6 @@
 import urllib2
-from bottle import route, run, template, request
-from converter import convert_to_saarland_area
+from bottle import route, run, template, request, static_file
+from converter import convert_to_saarland_area, get_object_name
 
 # for debugging only! **********************************************************
 #from bottle import run
@@ -30,13 +30,15 @@ def calc_saarland(thing=""):
         # input has been entered: look up ALL the things! \o,
 
         # get the thing we want to measure in saarlands
-        thing = request.GET.thing.strip()
+        compare_to = request.GET.thing.strip()
 
-        print "received request for %s, converting to Saarland" % thing
-        if (thing):
-            result = convert_to_saarland_area(thing)
+        print "received request for %s, converting to Saarland" % compare_to
+        if (compare_to):
+            result = convert_to_saarland_area(compare_to)
             print "received result %s, updating website..." % result
-            # todo: append things to current template? geht das?
+
+        # make thing human readable
+        thing = get_object_name(compare_to)
 
     return template('template', thing=thing, result=result)
 
