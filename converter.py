@@ -50,7 +50,7 @@ def get_property(object_q, prop):
     try:
         return content["results"]["bindings"][0]["results"]["value"]
     except:
-        print("ERROR: couldn't get property %s for object %s" % (prop, object))
+        print("ERROR: couldn't get property %s for object %s" % (prop, object_q))
 
 '''
 Takes a wikidata Object (Q...) and converts it to Saarland
