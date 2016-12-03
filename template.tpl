@@ -5,16 +5,42 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title></title>
     <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Bungee');
+        @import url('https://fonts.googleapis.com/css?family=Kumar+One+Outline');
+        @import url('https://fonts.googleapis.com/css?family=Kumar+One');
 
         body {
-            text-align: center;
+            text-align: left;
             font-family: sans-serif;
         }
 
-        h1 {
-            padding: 25px;
+        h11 {
+            line-height: 70%;
             font-weight: black;
             font-size: 80px;
+            font-family: "Kumar One Outline";
+            color: #333;
+            margin: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        h12 {
+            line-height: 70%;
+            font-weight: black;
+            font-size: 120px;
+            font-family: "Bungee";
+            color: #ff4081;
+            margin: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        h13 {
+            line-height: 90%;
+            font-weight: black;
+            font-size: 80px;
+            font-family: "Kumar One";
             color: #333;
             margin: 0;
             display: inline-block;
@@ -23,19 +49,45 @@
 
         p {
             font-weight: lighter;
-            font-size: 75px;
+            font-size: 60px;
+            color: #333;
         }
+
+        .center {
+            margin: auto;
+            margin-top: 50px;
+            width: 60%;
+            border: 0px solid #73AD21;
+            padding: 20px;
+        }
+
+        input[type=text] {
+            height: 22px;
+            width: 70%;
+        }
+
+        input[type=submit] {
+            height: 22px;
+        }
+
     </style>
 </head>
 <body>
-    <div>
-        <h1>All Saarland Everything</h1>
-    </div>
-    <form action="/new/thing" method="GET">
-      <input type="text" size="100" maxlength="100" name="thing">
-      <input type="submit" name="convert" value="convert">
-    </form>
-    % if (result != -1):
-    <p> {{thing}} ist {{result}} Saarland.</p>
+    <div class="center">
+        <div>
+            <h11>All</h11> <br>
+            <h12>Saarland</h12> <br>
+            <h13>Everything</h13> <br>
+        </div>
+        <br>
+        <br>
+        <br>
+        <form action="/new/thing" method="GET">
+          <input type="text" size="50" maxlength="50" name="thing">
+          <input type="submit" name="convert" value="convert">
+        </form>
+        % if (result != -1):
+        <p> {{thing}} ist {{result}} Saarland.</p>
+    </div> <!-- content -->
 </body>
 </html>
