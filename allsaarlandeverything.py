@@ -23,19 +23,21 @@ WHERE
 @route('/')
 @route('/new/<thing>', method='GET')
 def calc_saarland(thing=""):
+    result = -1
+    thing = ""
 
     if request.GET.convert:
         # input has been entered: look up ALL the things! \o,
 
         # get the thing we want to measure in saarlands
-        compare_to = request.GET.thing.strip()
+        thing = request.GET.thing.strip()
 
-        print "received request for %s, converting to Saarland" % compare_to
-        if (compare_to):
-            result = convert_to_saarland_area(compare_to)
+        print "received request for %s, converting to Saarland" % thing
+        if (thing):
+            result = convert_to_saarland_area(thing)
             print "received result %s, updating website..." % result
             # todo: append things to current template? geht das?
 
-    return template('template')
+    return template('template', thing=thing, result=result)
 
 run(host='0.0.0.0', port=8080, debug=False)

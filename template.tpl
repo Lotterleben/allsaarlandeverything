@@ -35,5 +35,7 @@
       <input type="text" size="100" maxlength="100" name="thing">
       <input type="submit" name="convert" value="convert">
     </form>
+    % if (result != -1):
+    <p> {{thing}} ist {{result}} Saarland.</p>
 </body>
 </html>
