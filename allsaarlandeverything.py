@@ -5,7 +5,7 @@ from converter import convert_to_saarland_area, get_object_name
 @route('/')
 @route('/new/<thing>', method='GET')
 def calc_saarland(thing=""):
-    result = -1
+    result = {}
     thing = ""
 
     if request.GET.convert:
@@ -16,8 +16,11 @@ def calc_saarland(thing=""):
 
         print "received request for %s, converting to Saarland" % compare_to
         if (compare_to):
-            result = convert_to_saarland_area(compare_to)
-            print "received result %s, updating website..." % result
+            area = convert_to_saarland_area(compare_to)
+            result["area"] = area
+            print "received area result %s, updating website..." % area
+
+            #result["people"] = 123
 
         # make thing human readable
         thing = get_object_name(compare_to)

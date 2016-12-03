@@ -49,7 +49,7 @@
 
         p {
             font-weight: lighter;
-            font-size: 60px;
+            font-size: 35px;
             color: #333;
         }
 
@@ -86,8 +86,20 @@
           <input type="text" size="50" maxlength="50" name="thing">
           <input type="submit" name="convert" value="convert">
         </form>
-        % if (result != -1):
-        <p> {{thing}} ist {{result}} Saarland.</p>
+        % if (result != {}):
+        <p>{{thing}} entspricht
+            %if ("area" in result):
+                 <b>{{result["area"]}}</b> (km2)
+            %end
+            %if ("people" in result):
+                %if ("area" in result):
+                    bzw.
+                <b>{{result["people"]}}</b> (Menschen)
+                %end
+            %end
+        Saarland.
+        %end
+        </p>
     </div> <!-- content -->
 </body>
 </html>
