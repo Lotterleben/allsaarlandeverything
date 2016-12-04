@@ -97,8 +97,8 @@
             %if ("people" in result):
                 %if ("area" in result):
                     bzw.
-                <b>{{result["people"]}}</b> (Menschen)
                 %end
+                <b>{{result["people"]}}</b> (Menschen)
             %end
         <br>Saarland.
         %end
