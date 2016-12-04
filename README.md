@@ -1,4 +1,4 @@
-![screenshot of the application](resources/screenshot.png =500x)
+![screenshot of the application](resources/screenshot.png)
 
 ## Dependencies
 
