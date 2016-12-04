@@ -1,6 +1,6 @@
 import urllib2
 from bottle import route, run, template, request, static_file
-from converter import convert_to_saarland_area, get_object_name
+from converter import convert_to_saarland_area, get_object_name, convert_to_saarland_people
 
 @route('/')
 @route('/new/<thing>', method='GET')
@@ -17,10 +17,14 @@ def calc_saarland(thing=""):
         print "received request for %s, converting to Saarland" % compare_to
         if (compare_to):
             area = convert_to_saarland_area(compare_to)
-            result["area"] = area
-            print "received area result %s, updating website..." % area
+            if (area > 0):
+                result["area"] = area
+                print "received area result %s, updating website..." % area
 
-            #result["people"] = 123
+            people = convert_to_saarland_people(compare_to)
+            if (people > 0):
+                result["people"] = people
+                print "received people result %s, updating website..." % area
 
         # make thing human readable
         thing = get_object_name(compare_to)
