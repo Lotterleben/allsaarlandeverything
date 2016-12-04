@@ -15,7 +15,7 @@
         }
 
         h11 {
-            line-height: 70%;
+            line-height: 65%;
             font-weight: black;
             font-size: 80px;
             font-family: "Kumar One Outline";
@@ -62,12 +62,14 @@
         }
 
         input[type=text] {
-            height: 22px;
+            height: 40px;
             width: 70%;
         }
 
         input[type=submit] {
-            height: 22px;
+            height: 50px;
+            padding: 50px 40px;
+            font-size: 100px;
         }
 
     </style>
@@ -87,9 +89,10 @@
           <input type="submit" name="convert" value="convert">
         </form>
         % if (result != {}):
-        <p>{{thing}} entspricht
+        <br>
+        <p>{{thing}} entspricht<br>
             %if ("area" in result):
-                 <b>{{result["area"]}}</b> (km2)
+                 <b>{{result["area"]}}</b> (Fläche)
             %end
             %if ("people" in result):
                 %if ("area" in result):
@@ -97,7 +100,7 @@
                 <b>{{result["people"]}}</b> (Menschen)
                 %end
             %end
-        Saarland.
+        <br>Saarland.
         %end
         </p>
     </div> <!-- content -->
