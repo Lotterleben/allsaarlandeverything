@@ -76,12 +76,15 @@ def get_properties_area(object_q):
         # no result for area
         pass
 
-    #try length x width
-    if ("length" in content["results"]["bindings"][0] and
-        "width" in content["results"]["bindings"][0]):
-        length = float(content["results"]["bindings"][0]["length"]["value"])
-        width = float(content["results"]["bindings"][0]["width"]["value"])
-        result = length * width * 0.000001 # aaand convert from m2 to km2
+    try:
+        #try length x width
+        if ("length" in content["results"]["bindings"][0] and
+            "width" in content["results"]["bindings"][0]):
+            length = float(content["results"]["bindings"][0]["length"]["value"])
+            width = float(content["results"]["bindings"][0]["width"]["value"])
+            result = length * width * 0.000001 # aaand convert from m2 to km2
+    except:
+        pass
 
     return result
 
