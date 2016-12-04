@@ -10,12 +10,17 @@ TODO:
 '''
 
 api_base_url = "https://query.wikidata.org/bigdata/namespace/wdq/sparql?query=%s&format=json"
-area_base_q = '''SELECT ?results
+area_base_q = '''SELECT ?length ?width ?area
 WHERE
 {
-  VALUES ?place { wd:%s }
-  ?place wdt:P2046 ?results.
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "de". }
+  {
+    VALUES ?place { wd:%s }
+    ?place wdt:P2043 ?length;
+    wdt:P2049 ?width.
+  } UNION {
+    VALUES ?place { wd:%s }
+    ?place wdt:P2046 ?area.
+  }
 }
 '''
 
@@ -61,15 +66,22 @@ def get_object_name(object_q):
 Get area properties with which a thing could be converted to saarland.
 '''
 def get_properties_area(object_q):
-    query_url = api_base_url % urllib2.quote(area_base_q % (object_q))
+    query_url = api_base_url % urllib2.quote(area_base_q % (object_q, object_q))
     content = json.load(urllib2.urlopen(query_url))
     result = 0.0
 
     try:
-        result = float(content["results"]["bindings"][0]["results"]["value"])
+        result = float(content["results"]["bindings"][0]["area"]["value"])
     except:
         # no result for area
         pass
+
+    #try length x width
+    if ("length" in content["results"]["bindings"][0] and
+        "width" in content["results"]["bindings"][0]):
+        length = float(content["results"]["bindings"][0]["length"]["value"])
+        width = float(content["results"]["bindings"][0]["width"]["value"])
+        result = length * width * 0.000001 # aaand convert from m2 to km2
 
     return result
 
@@ -110,7 +122,7 @@ def convert_to_saarland_area(thing):
     if (thing_area > 0):
         result = thing_area / saarland_area
 
-    result_precision = float("%0.4f" % result)
+    result_precision = float("%0.7f" % result)
     return result_precision
 
 def convert_to_saarland_people(thing):
@@ -127,12 +139,12 @@ def convert_to_saarland_people(thing):
     if (thing_people > 0):
         result = thing_people / saarland_people
 
-    result_precision = float("%0.4f" % result)
+    result_precision = float("%0.10f" % result)
     return result_precision
 
 if __name__ == "__main__":
     print get_object_name("Q3012")
     print "1 Ulm sind %s Saarland bzgl Flaeche" % convert_to_saarland_area("Q3012")
     print "1 Anfield sind %s Saarland bzgl Menschen" % convert_to_saarland_people("Q45671")
-
+    print "1 Fussballfeld ist %s Saarland bzgl Flaeche" % convert_to_saarland_area("Q8524")
 
